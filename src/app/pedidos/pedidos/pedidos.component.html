@@ -1,0 +1,25 @@
+<h2>Pedidos</h2>
+
+<div>
+  <h3>Novo Pedido</h3>
+  <input type="text" placeholder="Cliente" [(ngModel)]="novoPedido.cliente" />
+  <input type="text" placeholder="Produto" [(ngModel)]="novoItem.nome" />
+  <input
+    type="number"
+    placeholder="Quantidade"
+    [(ngModel)]="novoItem.quantidade"
+  />
+  <button (click)="adicionarItem()">Adicionar Item</button>
+  <button (click)="criarPedido()">Criar Pedido</button>
+</div>
+
+<ul>
+  <li *ngFor="let pedido of pedidos">
+    <strong>{{ pedido.cliente }}</strong>
+    <ul>
+      <li *ngFor="let item of pedido.itens">
+        {{ item.nome }} - {{ item.quantidade }}
+      </li>
+    </ul>
+  </li>
+</ul>

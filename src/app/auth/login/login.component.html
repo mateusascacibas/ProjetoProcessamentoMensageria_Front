@@ -1,0 +1,17 @@
+<form (ngSubmit)="login()" class="login-form">
+  <h2>Login</h2>
+  <div>
+    <label>Client ID</label>
+    <input type="text" [(ngModel)]="clientId" name="clientId" required />
+  </div>
+  <div>
+    <label>Client Secret</label>
+    <input
+      type="password"
+      [(ngModel)]="clientSecret"
+      name="clientSecret"
+      required
+    />
+  </div>
+  <button type="submit">Entrar</button>
+</form>
