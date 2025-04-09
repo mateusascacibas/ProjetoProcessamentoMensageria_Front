@@ -1,25 +1,58 @@
-<h2>Pedidos</h2>
+<div class="max-w-3xl mx-auto p-6">
+  <div class="flex justify-end mb-4">
+    <button (click)="logout()" class="text-sm text-red-600 hover:underline">
+      🚪 Sair
+    </button>
+  </div>
 
-<div>
-  <h3>Novo Pedido</h3>
-  <input type="text" placeholder="Cliente" [(ngModel)]="novoPedido.cliente" />
-  <input type="text" placeholder="Produto" [(ngModel)]="novoItem.nome" />
-  <input
-    type="number"
-    placeholder="Quantidade"
-    [(ngModel)]="novoItem.quantidade"
-  />
-  <button (click)="adicionarItem()">Adicionar Item</button>
-  <button (click)="criarPedido()">Criar Pedido</button>
+  <h2 class="text-2xl font-bold mb-4 text-center">📦 Pedidos</h2>
+
+  <div class="bg-gray-100 p-4 rounded-lg shadow mb-6 space-y-4">
+    <h3 class="text-lg font-medium">Novo Pedido</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <input
+        type="text"
+        placeholder="Cliente"
+        [(ngModel)]="novoPedido.cliente"
+        class="p-2 border border-gray-300 rounded-md w-full"
+      />
+      <input
+        type="text"
+        placeholder="Produto"
+        [(ngModel)]="novoItem.nome"
+        class="p-2 border border-gray-300 rounded-md w-full"
+      />
+      <input
+        type="number"
+        placeholder="Quantidade"
+        [(ngModel)]="novoItem.quantidade"
+        class="p-2 border border-gray-300 rounded-md w-full"
+      />
+    </div>
+    <div class="flex gap-4 justify-end">
+      <button
+        (click)="adicionarItem()"
+        class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+      >
+        ➕ Adicionar Item
+      </button>
+      <button
+        (click)="criarPedido()"
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+      >
+        🚀 Criar Pedido
+      </button>
+    </div>
+  </div>
+
+  <ul class="space-y-4">
+    <li *ngFor="let pedido of pedidos" class="border p-4 rounded shadow-sm">
+      <strong class="text-lg text-blue-600">{{ pedido.cliente }}</strong>
+      <ul class="ml-4 mt-2 list-disc list-inside text-gray-700">
+        <li *ngFor="let item of pedido.itens">
+          {{ item.nome }} — {{ item.quantidade }}
+        </li>
+      </ul>
+    </li>
+  </ul>
 </div>
-
-<ul>
-  <li *ngFor="let pedido of pedidos">
-    <strong>{{ pedido.cliente }}</strong>
-    <ul>
-      <li *ngFor="let item of pedido.itens">
-        {{ item.nome }} - {{ item.quantidade }}
-      </li>
-    </ul>
-  </li>
-</ul>

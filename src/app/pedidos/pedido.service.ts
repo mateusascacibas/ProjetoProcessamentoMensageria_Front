@@ -13,6 +13,6 @@ export class PedidoService {
   }
 
   criar(pedido: Pedido) {
-    return this.http.post(this.url, pedido);
+    return this.http.post(this.url, pedido, { responseType: 'text' });
   }
 }
