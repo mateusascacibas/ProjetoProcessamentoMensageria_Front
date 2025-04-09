@@ -1,60 +1,129 @@
-# ProcessamentoPedidosFront
+# 📦 Processamento de Pedidos - Frontend Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
+Este projeto é o **frontend** para o sistema de Processamento de Pedidos, desenvolvido em **Angular 17** com integração via **OAuth2**, **TailwindCSS** e preparado para comunicação com backend via token JWT.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Tecnologias Utilizadas
+
+- [x] Angular 17
+- [x] Standalone Components
+- [x] TailwindCSS
+- [x] RxJS
+- [x] JWT Interceptor
+- [x] HttpClientModule
+- [x] FormsModule (ngModel)
+
+---
+
+## 📸 Telas
+
+- Tela de Login (com clientId e clientSecret)
+- Tela de Pedidos:
+  - Visualização dos pedidos
+  - Criação de novos pedidos com múltiplos itens
+  - Logout
+
+---
+
+## 🔐 Autenticação
+
+A autenticação utiliza o fluxo **Client Credentials (OAuth2)**. O token é armazenado temporariamente e injetado automaticamente nas requisições por um `TokenInterceptor`.
+
+---
+
+## 📦 Instalação
 
 ```bash
+npm install
+```
+
+### TailwindCSS
+Certifique-se de que o projeto tenha os arquivos:
+
+- `tailwind.config.js`
+- `postcss.config.js`
+
+Caso não tenha:
+```bash
+npx tailwindcss init -p
+```
+
+E adicione ao `tailwind.config.js`:
+```js
+content: [
+  "./src/**/*.{html,ts}"
+]
+```
+
+---
+
+## 🧪 Executar em Desenvolvimento
+
+```bash
+npm run start
+# ou
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Acesse: [http://localhost:4200](http://localhost:4200)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🐳 Docker
 
-```bash
-ng generate component component-name
+Você pode rodar este frontend em um container Docker com o seguinte `Dockerfile`:
+
+```Dockerfile
+# Dockerfile
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY . .
+RUN npm install && npm run build --prod
+
+FROM nginx:alpine
+COPY --from=build /app/dist/* /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+### 🛠️ Build & Run
 ```bash
-ng generate --help
+docker build -t pedidos-angular-front .
+docker run -p 4200:80 pedidos-angular-front
 ```
 
-## Building
+---
 
-To build the project run:
+## ✅ Funcionalidades
 
-```bash
-ng build
-```
+- [x] Autenticação com token JWT
+- [x] Interceptor automático
+- [x] Visualização e criação de pedidos
+- [x] Atualização automática após criar
+- [x] Logout funcional
+- [x] Estilo com TailwindCSS
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+## 📂 Estrutura Principal
 
 ```bash
-ng e2e
+src/
+├── app/
+│   ├── auth/             # Login + AuthService
+│   ├── pedidos/          # Tela e serviço de pedidos
+│   ├── shared/           # Models e Interceptors
+├── assets/
+├── main.ts
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 📢 Autor
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-"# ProjetoProcessamentoMensageria_Front" 
+Feito com 💙 por **Mateus**
+
+---
+
+Se esse projeto te ajudou, dê uma ⭐ no repositório!
